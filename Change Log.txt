@@ -1,0 +1,7 @@
+v1.1
+
+Added:
+    output_error function
+    self.error to the neuron
+    function to compute self.error for hidden layers
+    solved a bug in the data where it was saving as strings and couldn't do math.

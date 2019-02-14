@@ -1,7 +1,25 @@
+v1.3
+added:
+    Matlabplot to graph error rates
+    added learning rate, had to try a bunch of different values before
+        data behaved as expected.
+    Project appears to function correctly. 
+
+v1.2
+
+added:
+	Applies error functions to calculate errors
+	adjust_weights function
+	the main function runs 1 data item through the network once,
+		adjusts the weights, runs the item through the network
+		again, and reports the new output error. The error
+		appears to be lower each time. Makes me think that the
+		system works.
+
 v1.1
 
 Added:
-    output_error function
-    self.error to the neuron
-    function to compute self.error for hidden layers
-    solved a bug in the data where it was saving as strings and couldn't do math.
+	output_error function
+	self.error to the neuron
+	function to compute self.error for hidden layers
+	solved a bug in the data where it was saving as strings and couldn't do math.

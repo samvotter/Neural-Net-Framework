@@ -1,6 +1,8 @@
 import General_Functions as gf
 import random
 
+learning_rate = .001
+
 
 class NeuronCol:
 
@@ -14,10 +16,6 @@ class NeuronCol:
             for neurons in col:
                 neuron.weights[neurons] = random.randint(-20, 20)/100
                 neuron.connections.append(neurons)
-
-    def clean(self):
-        for neuron in self.neurons:
-            neuron.incoming.clear()
 
     def insert_bias(self, col):
         bias = Neuron()
@@ -52,9 +50,20 @@ class Neuron:
         for con in self.connections:
             con.incoming.append(self.held*self.weights[con])
 
-    def computer_error(self, col):
+    def compute_error(self):
         total = 0
         for con in self.connections:
             total += self.weights[con]*con.error
         total *= self.held * (1 - self.held)
         self.error = total
+
+    def adjust_weights(self):
+        for con in self.connections:
+            self.weights[con] += self.held * con.error * learning_rate
+
+    def clean(self):
+        for item in self.incoming:
+            self.incoming.remove(item)
+
+
+

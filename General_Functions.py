@@ -10,7 +10,7 @@ def sigmoid(number):
 
 
 def initialize(col, data):
-    col.neurons[0].held = data.year - 1919
+    col.neurons[0].held = data.year
     col.neurons[1].held = data.rt
     col.neurons[2].held = data.imdb
 

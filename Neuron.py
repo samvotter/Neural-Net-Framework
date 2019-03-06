@@ -1,14 +1,15 @@
 import General_Functions as gf
 import random
 
-learning_rate = .001
+learning_rate = .8
 
 
 class NeuronCol:
 
     def __init__(self, number):
         self.neurons = []
-        for i in range(number):
+        self.bias = Neuron()
+        for i in range(0, number):
             self.neurons.append(Neuron())
 
     def connect(self, col):
@@ -18,12 +19,10 @@ class NeuronCol:
                 neuron.connections.append(neurons)
 
     def insert_bias(self, col):
-        bias = Neuron()
-        self.neurons.append(bias)
+        self.bias.held = int(1)
         for neurons in col:
-            bias.weights[neurons] = 1
-            bias.connections.append(neurons)
-            bias.held = 1
+            self.bias.weights[neurons] = 1
+            self.bias.connections.append(neurons)
 
     def output_error(self, movie):
         for neuron in self.neurons:
@@ -38,6 +37,7 @@ class Neuron:
         self.weights = {}
         self.connections = []
         self.error = None
+        self.j = None
 
     def compute_held(self):
         total = 0
@@ -62,8 +62,11 @@ class Neuron:
             self.weights[con] += self.held * con.error * learning_rate
 
     def clean(self):
-        for item in self.incoming:
-            self.incoming.remove(item)
+        self.incoming.clear()
+        self.held = None
+
+    def compute_j(self, movie):
+        self.j = (movie.my_rating - self.held)**2
 
 
 
